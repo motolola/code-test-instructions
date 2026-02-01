@@ -1,3 +1,3 @@
-package com.tpx.urlshortener.model;
+package com.urlshortener.model;
 
 public record UrlDto(String alias, String fullUrl, String shortUrl) {}

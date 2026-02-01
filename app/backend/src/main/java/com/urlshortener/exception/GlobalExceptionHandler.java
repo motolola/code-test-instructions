@@ -1,4 +1,4 @@
-package com.tpx.urlshortener.exception;
+package com.urlshortener.exception;
 
 import java.util.HashMap;
 import java.util.Map;

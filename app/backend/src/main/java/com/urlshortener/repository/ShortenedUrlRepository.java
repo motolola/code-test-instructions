@@ -1,6 +1,6 @@
-package com.tpx.urlshortener.repository;
+package com.urlshortener.repository;
 
-import com.tpx.urlshortener.model.ShortenedUrl;
+import com.urlshortener.model.ShortenedUrl;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

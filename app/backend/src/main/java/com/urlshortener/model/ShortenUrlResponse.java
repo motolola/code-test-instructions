@@ -1,3 +1,3 @@
-package com.tpx.urlshortener.model;
+package com.urlshortener.model;
 
 public record ShortenUrlResponse(String shortUrl) {}

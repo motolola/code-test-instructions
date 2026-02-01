@@ -1,4 +1,4 @@
-package com.tpx.urlshortener.exception;
+package com.urlshortener.exception;
 
 public class AliasNotFoundException extends RuntimeException {
   public AliasNotFoundException(String message) {

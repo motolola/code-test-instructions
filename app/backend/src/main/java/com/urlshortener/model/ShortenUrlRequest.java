@@ -1,4 +1,4 @@
-package com.tpx.urlshortener.model;
+package com.urlshortener.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

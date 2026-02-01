@@ -1,12 +1,12 @@
-package com.tpx.urlshortener.service;
+package com.urlshortener.service;
 
-import com.tpx.urlshortener.exception.AliasAlreadyExistsException;
-import com.tpx.urlshortener.exception.AliasNotFoundException;
-import com.tpx.urlshortener.model.ShortenUrlRequest;
-import com.tpx.urlshortener.model.ShortenUrlResponse;
-import com.tpx.urlshortener.model.ShortenedUrl;
-import com.tpx.urlshortener.model.UrlDto;
-import com.tpx.urlshortener.repository.ShortenedUrlRepository;
+import com.urlshortener.exception.AliasAlreadyExistsException;
+import com.urlshortener.exception.AliasNotFoundException;
+import com.urlshortener.model.ShortenUrlRequest;
+import com.urlshortener.model.ShortenUrlResponse;
+import com.urlshortener.model.ShortenedUrl;
+import com.urlshortener.model.UrlDto;
+import com.urlshortener.repository.ShortenedUrlRepository;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.stream.Collectors;
