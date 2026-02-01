@@ -47,7 +47,7 @@ It should:
 
 ### IntelliJ IDEA Setup
 
-For detailed instructions on how to open and configure this project in IntelliJ IDEA, see [INTELLIJ_SETUP.md](./INTELLIJ_SETUP.md).
+For detailed instructions on how to open and configure this project in IntelliJ IDEA.
 
 **Quick Start:**
 1. Open IntelliJ IDEA
@@ -55,31 +55,52 @@ For detailed instructions on how to open and configure this project in IntelliJ 
 3. IntelliJ will automatically detect it as a Maven project
 4. Wait for Maven to download dependencies and index
 
-### Current Project Structure
+## 🚀 Quick Start (Recommended)
 
-```
-code-test-instructions/
-├── app/
-│   ├── backend/          # Spring Boot backend (Java 21, Maven)
-│   │   ├── src/
-│   │   │   ├── main/java/com/urlshortener/
-│   │   │   │   ├── UrlShortenerApplication.java
-│   │   │   │   └── controller/
-│   │   │   │       └── HelloController.java
-│   │   │   └── resources/
-│   │   │       └── application.properties
-│   │   │   └── test/java/
-│   │   │       └── ...
-│   │   ├── pom.xml
-│   │   └── README.md
-│   └── frontend/         # Frontend (to be implemented)
-├── openapi.yaml          # API specification
-├── README.md
-└── INTELLIJ_SETUP.md     # Detailed IntelliJ setup guide
-```
+Use the provided `run.sh` script for easy setup and execution:
 
 ```bash
-cd backend
+# First time setup (optional but recommended)
+./run.sh setup
+
+# Start the application with Docker
+./run.sh docker
+
+# View logs
+./run.sh logs
+
+# Stop the application
+./run.sh stop
+```
+
+The application will be available at:
+- **Frontend:** http://localhost:3000
+- **Backend API:** http://localhost:8080
+- **API Docs:** http://localhost:8080/urls
+
+For more options, run: `./run.sh help`
+
+## 🐳 Docker Setup (Alternative)
+
+You can also use Docker Compose directly:
+
+```bash
+# Build and start all services
+docker-compose up -d --build
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+```
+
+## 💻 Local Development Setup
+
+### Running the Backend Manually
+
+```bash
+cd app/backend
 
 # Build the project
 mvn clean install
@@ -91,12 +112,10 @@ mvn spring-boot:run
 java -jar target/url-shortener-1.0.0.jar
 ```
 
-The backend will start on `http://localhost:8080`
-
-### Running the Frontend
+### Running the Frontend Manually
 
 ```bash
-cd frontend
+cd app/frontend
 
 # Install dependencies
 npm install
@@ -111,13 +130,13 @@ The frontend will start on `http://localhost:3000`
 
 **Backend Tests:**
 ```bash
-cd backend
+cd app/backend
 mvn test
 ```
 
 **Frontend Tests:**
 ```bash
-cd frontend
+cd app/frontend
 npm test
 ```
 

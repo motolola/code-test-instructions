@@ -43,7 +43,7 @@ function check_prerequisites() {
 
 function setup_backend() {
     print_info "Setting up backend..."
-    cd "$SCRIPT_DIR/backend"
+    cd "$SCRIPT_DIR/app/backend"
 
     if command -v mvn &> /dev/null; then
         print_info "Maven found. Running tests..."
@@ -58,7 +58,7 @@ function setup_backend() {
 
 function setup_frontend() {
     print_info "Setting up frontend..."
-    cd "$SCRIPT_DIR/frontend"
+    cd "$SCRIPT_DIR/app/frontend"
 
     if [ ! -d "node_modules" ]; then
         if command -v npm &> /dev/null; then
@@ -75,12 +75,37 @@ function setup_frontend() {
 
 function run_docker() {
     print_info "Starting application with Docker Compose..."
-    docker-compose up --build
+
+    # Check if containers are already running
+    if docker-compose ps | grep -q "Up"; then
+        print_warning "Containers are already running. Stopping them first..."
+        docker-compose down
+    fi
+
+    # Build and start in detached mode
+    print_info "Building and starting containers..."
+    docker-compose up -d --build
+
+    # Wait a moment for containers to start
+    sleep 3
+
+    # Show status
+    print_info "Container status:"
+    docker-compose ps
+
+    echo ""
+    print_info "Application started successfully!"
+    print_info "Frontend: http://localhost:3000"
+    print_info "Backend:  http://localhost:8080"
+    print_info "API Docs: http://localhost:8080/urls"
+    echo ""
+    print_info "To view logs, run: docker-compose logs -f"
+    print_info "To stop, run: $0 stop"
 }
 
 function run_local_backend() {
     print_info "Starting backend locally..."
-    cd "$SCRIPT_DIR/backend"
+    cd "$SCRIPT_DIR/app/backend"
 
     if ! command -v mvn &> /dev/null; then
         print_error "Maven is required to run backend locally."
@@ -92,7 +117,7 @@ function run_local_backend() {
 
 function run_local_frontend() {
     print_info "Starting frontend locally..."
-    cd "$SCRIPT_DIR/frontend"
+    cd "$SCRIPT_DIR/app/frontend"
 
     if ! command -v npm &> /dev/null; then
         print_error "npm is required to run frontend locally."
@@ -105,29 +130,46 @@ function run_local_frontend() {
 function stop_docker() {
     print_info "Stopping Docker containers..."
     docker-compose down
+    print_info "Containers stopped successfully!"
+}
+
+function logs_docker() {
+    print_info "Showing Docker container logs..."
+    print_info "Press Ctrl+C to exit logs view"
+    sleep 2
+    docker-compose logs -f
 }
 
 function clean() {
     print_info "Cleaning build artifacts..."
 
     # Clean backend
-    if [ -d "$SCRIPT_DIR/backend/target" ]; then
-        rm -rf "$SCRIPT_DIR/backend/target"
+    if [ -d "$SCRIPT_DIR/app/backend/target" ]; then
+        rm -rf "$SCRIPT_DIR/app/backend/target"
         print_info "Cleaned backend build artifacts"
     fi
 
     # Clean frontend
-    if [ -d "$SCRIPT_DIR/frontend/build" ]; then
-        rm -rf "$SCRIPT_DIR/frontend/build"
+    if [ -d "$SCRIPT_DIR/app/frontend/build" ]; then
+        rm -rf "$SCRIPT_DIR/app/frontend/build"
         print_info "Cleaned frontend build artifacts"
     fi
 
+    if [ -d "$SCRIPT_DIR/app/frontend/node_modules" ]; then
+        read -p "Remove frontend node_modules? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm -rf "$SCRIPT_DIR/app/frontend/node_modules"
+            print_info "Cleaned frontend node_modules"
+        fi
+    fi
+
     # Clean database
-    if [ -d "$SCRIPT_DIR/backend/data" ]; then
+    if [ -d "$SCRIPT_DIR/app/backend/data" ]; then
         read -p "Remove database files? (y/n) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            rm -rf "$SCRIPT_DIR/backend/data"
+            rm -rf "$SCRIPT_DIR/app/backend/data"
             print_info "Cleaned database files"
         fi
     fi
@@ -144,6 +186,7 @@ Usage: $0 [COMMAND]
 Commands:
     setup       Set up the application (check prerequisites, install dependencies)
     docker      Run the application with Docker Compose (recommended)
+    logs        View Docker container logs (requires containers to be running)
     backend     Run backend locally (requires Java 21 and Maven)
     frontend    Run frontend locally (requires Node.js and npm)
     stop        Stop Docker containers
@@ -153,13 +196,22 @@ Commands:
 Examples:
     $0 setup        # First time setup
     $0 docker       # Run with Docker (easiest)
+    $0 logs         # View logs from running containers
     $0 backend      # Run backend locally in this terminal
     $0 frontend     # Run frontend locally (open new terminal for this)
+    $0 stop         # Stop all Docker containers
+    $0 clean        # Clean build artifacts
 
-After starting:
-    Frontend: http://localhost:3000
-    Backend:  http://localhost:8080
+After starting with Docker:
+    Frontend:   http://localhost:3000
+    Backend:    http://localhost:8080
+    API Docs:   http://localhost:8080/urls
     H2 Console: http://localhost:8080/h2-console
+
+After starting locally:
+    Backend starts on port 8080
+    Frontend starts on port 3000
+    (You'll need two separate terminals)
 
 EOF
 }
@@ -175,6 +227,10 @@ case "${1:-}" in
     docker)
         check_prerequisites
         run_docker
+        ;;
+    logs)
+        check_prerequisites
+        logs_docker
         ;;
     backend)
         run_local_backend
