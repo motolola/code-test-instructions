@@ -1,0 +1,31 @@
+.govuk-button {
+  background-color: #00703c;
+  box-shadow: 0 2px 0 #002d18;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.govuk-button:hover:not(:disabled) {
+  background-color: #005a30;
+  box-shadow: 0 2px 0 #002d18;
+}
+
+.govuk-button:active:not(:disabled) {
+  box-shadow: 0 0 0 #002d18;
+  top: 2px;
+  position: relative;
+}
+
+.govuk-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.govuk-input {
+  font-family: "GDS Transport", arial, sans-serif;
+}
+
+.govuk-form-group {
+  margin-bottom: 30px;
+}
+

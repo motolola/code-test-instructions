@@ -42,3 +42,39 @@ It should:
   - How to build and run locally.
   - Example usage (frontend and API).
   - Any notes or assumptions.
+
+## Project Setup
+
+### IntelliJ IDEA Setup
+
+For detailed instructions on how to open and configure this project in IntelliJ IDEA, see [INTELLIJ_SETUP.md](./INTELLIJ_SETUP.md).
+
+**Quick Start:**
+1. Open IntelliJ IDEA
+2. File → Open → Select the `app/backend` folder
+3. IntelliJ will automatically detect it as a Maven project
+4. Wait for Maven to download dependencies and index
+
+### Current Project Structure
+
+```
+code-test-instructions/
+├── app/
+│   ├── backend/          # Spring Boot backend (Java 17, Maven)
+│   │   ├── src/
+│   │   │   ├── main/java/com/urlshortener/
+│   │   │   │   ├── UrlShortenerApplication.java
+│   │   │   │   └── controller/
+│   │   │   │       └── HelloController.java
+│   │   │   └── resources/
+│   │   │       └── application.properties
+│   │   │   └── test/java/
+│   │   │       └── ...
+│   │   ├── pom.xml
+│   │   └── README.md
+│   └── frontend/         # Frontend (to be implemented)
+├── openapi.yaml          # API specification
+├── README.md
+└── INTELLIJ_SETUP.md     # Detailed IntelliJ setup guide
+```
+

@@ -1,0 +1,86 @@
+.govuk-table {
+  margin-bottom: 30px;
+}
+
+.govuk-table__head {
+  background-color: #f3f2f1;
+}
+
+.govuk-table__header {
+  font-weight: 700;
+}
+
+.govuk-table__row:hover {
+  background-color: #f8f8f8;
+}
+
+.govuk-tag {
+  display: inline-block;
+  padding: 5px 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0;
+}
+
+.govuk-tag--blue {
+  background-color: #1d70b8;
+  color: white;
+}
+
+.govuk-link {
+  color: #1d70b8;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.govuk-link:hover {
+  color: #003078;
+}
+
+.copy-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.govuk-button--secondary {
+  background-color: #f3f2f1;
+  color: #0b0c0c;
+  box-shadow: 0 2px 0 #929191;
+}
+
+.govuk-button--secondary:hover:not(:disabled) {
+  background-color: #dbdad9;
+}
+
+.govuk-button--warning {
+  background-color: #d4351c;
+  box-shadow: 0 2px 0 #942514;
+}
+
+.govuk-button--warning:hover:not(:disabled) {
+  background-color: #aa2a16;
+}
+
+.url-cell {
+  max-width: 400px;
+}
+
+.full-url {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+.govuk-inset-text {
+  border-left: 10px solid #b1b4b6;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+

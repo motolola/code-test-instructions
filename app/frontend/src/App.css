@@ -1,0 +1,29 @@
+.govuk-header {
+  background-color: #0b0c0c;
+  border-bottom: 10px solid #1d70b8;
+}
+
+.govuk-header__logotype-text {
+  color: white;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.govuk-header__link--service-name {
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.govuk-main-wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.govuk-footer {
+  background-color: #f3f2f1;
+  border-top: 1px solid #b1b4b6;
+  margin-top: 50px;
+}
+
